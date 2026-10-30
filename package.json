@@ -8,29 +8,32 @@
   },
   "scripts": {
     "postinstall": "hnk prepare",
-    "dev": "wrangler dev",
+    "dev": "hnk prepare && tsx watch src/server.ts",
+    "start": "tsx src/server.ts",
     "typecheck": "tsc --noEmit",
     "lint": "oxlint .",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "test": "vitest run",
     "check": "node scripts/check.mjs",
-    "db:generate": "drizzle-kit generate"
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate"
   },
   "dependencies": {
+    "@hono/node-server": "^1",
+    "@libsql/client": "^0",
     "drizzle-orm": "^0.45.2",
-    "hono-kit": "link:/Users/a.kawanobe/dev/hono/hono-kit/packages/hono-kit",
     "hono": "^4.13.1",
+    "hono-kit": "link:/Users/a.kawanobe/dev/hono/hono-kit/packages/hono-kit",
     "zod": "^4.4.3"
   },
   "devDependencies": {
-    "@cloudflare/vitest-plugin": "^1.3.7",
-    "@cloudflare/workers-types": "^5.20260813.1",
+    "@types/node": "^26.6.6",
     "drizzle-kit": "^0.31.11",
     "oxlint": "^1.80.0",
     "prettier": "^3.9.6",
+    "tsx": "^4",
     "typescript": "^7.0.2",
-    "vitest": "^4.1.11",
-    "wrangler": "^4.148.0"
+    "vitest": "^4.1.11"
   }
 }

@@ -1,4 +1,8 @@
-import { applyD1Migrations } from "cloudflare:test";
-import { env } from "cloudflare:workers";
+import fs from "node:fs";
+import { migrate } from "drizzle-orm/libsql/migrator";
+import { makeDeps } from "#/main";
 
-await applyD1Migrations(env.DB, env.TEST_MIGRATIONS);
+// Until the first pnpm db:generate there is nothing to apply
+if (fs.existsSync("./migrations/meta/_journal.json")) {
+  await migrate(makeDeps().db, { migrationsFolder: "./migrations" });
+}
